@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love Letter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #fff5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border: 1px solid #ffe6e6;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+        
+        .photo-container {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 50%;
+        }
+
+        .photo-container img {
+            max-width: 100%;
+            height: auto;
+			
+        }
+        
+        .letter-content {
+            padding: 20px;
+            background-color: #fff9f9;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .letter-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .signature {
+            margin-top: 30px;
+            text-align: right;
+            font-style: italic;
+            color: #ff6b6b;
+        }
+        
+        .date {
+            text-align: right;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        .heart {
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            display: inline-block;
+            animation: beat 1s infinite alternate;
+            transform-origin: center;
+        }
+        
+        @keyframes beat {
+            to {
+                transform: scale(1.2);
+            }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My <span class="heart">♥</span> Love <span class="heart">♥</span></h1>
+        </header>
+        
+        <div class="photo-container">
+            <img src="c185789c-5ae8-46dd-99ad-a5b3f02a92bb.png" alt="Photo of her" />
+        </div>
+        
+        <div class="date">
+            AUGUST 1, 2025
+        </div>
+        
+        <div class="letter-content">
+            <p>Dear My love Hazel,</p>
+            
+            <p>As I sit down and write this letter, my heart is bursting with emotions. I find myself struggling to put into words the depth of my feelings for you. But I'll do my best to express it all here.</p>
+            
+            <p>Gusto ko lang sabihin na mula ng una kitang makilala napaka saya ko dahil alam mo naman torpe ako eh, kaya nung may chance na ako na makilala ka kinuha ko na yung chance na yun ina-add mo na ako eh chance ko na yun para makilala ka at doon nag simula ang lahat nakilala kita at naging masaya ako. Tsaka nung nakilala kita may something special sayo. Ikaw lang naman nag bigay sa akin ng gantong saya na hindi ko maipaliwanag, ikaw din ang babae na nag paramdam sa akin na pag kasama kita comfortable ako na alam ko na safe ako at pwede ako mag open sayo at ikaw din ang babae na hindi ako mag-iisip na baka kung anong gawin mo habang wala ako kasi pinatunayan mo na iba ka sa mga babae na nakikita ko. I feel so lucky to be with you, and i thank you for choosing me everyday. </p>
+            
+            <p>Alam mo tuwing kasama kita tinuruan mo ako paano mag mahal at kung ano ang ibigsabihin ng totoong pag aalaga for someone. Pinakita mo rin sa akin na ang true love is about accepting and supporting each other through all of life's ups and downs. Alam ko kahit anong mga challenges ang kaharapin natin in the future, kakaharapin natin siya ng magkasama.</p>
+            
+            <p>As I write this, may na alala ako na quote and the quote goes like this "Love is not about pessession, its about appreciation." Na a-apreciate kita more than words can say, at promise na i will cherish you every moment, and every day for the rest of my life.</p>
+			
+            <p>Yours always and forever,</p>
+			
+            <div class="signature">
+                Angelo J. Rosalejos
+            </div>
+        </div>
+        
+        <footer>
+            Made with <span class="heart">♥</span> for you<br>
+			<a href="Picture.html">Pictures of you</a>
+        </footer>
+    </div>
+    
+    <script>
+        document.querySelectorAll('p').forEach(p => {
+            p.addEventListener('click', function() {
+                // Replace the placeholder text with your own message
+                if (this.innerHTML.includes('[') && this.innerHTML.includes(']')) {
+                    this.innerHTML = prompt('Enter your personal message:', this.innerHTML);
+                }
+            });
+        });
+        
+        // Click the image to change it
+        document.querySelector('img').addEventListener('click', function() {
+            const newSrc = prompt('Enter the URL of your photo together:');
+            if (newSrc) {
+                this.src = newSrc;
+            }
+        });
+    </script>
+</body>
+</html>

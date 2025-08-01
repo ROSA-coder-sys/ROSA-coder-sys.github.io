@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Love Letter</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffe0e9;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      cursor: pointer;
+    }
+
+    .envelope {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      transform: translateY(0);
+      transition: transform 1s ease;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-top: 100px solid #f48fb1;
+      transform-origin: top center;
+      transition: transform 0.8s ease;
+      transform: rotateX(0deg);
+      z-index: 1;
+    }
+
+    .envelope-body {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 235px;
+      background: #f06292;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    .letter {
+      position: absolute;
+      bottom: 180px;
+      left: 0;
+      width: 100%;
+      height: 215px;
+      background: white;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      border-radius: 10px;
+      transform: translateY(100%);
+      transition: transform 1s ease, z-index 0.5s ease;
+      z-index: 1;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Moves letter up */
+    .container.open .letter {
+      transform: translateY(0);
+      z-index: 4;
+      transition: transform 1s ease;
+    }
+
+    /* Move letter to center of screen */
+    .letter.move-down {
+      transform: translateY(250px) scale(1.1); 
+      transition: transform 1s ease; 
+      z-index: 10;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animation moving letter prominently in front */
+    .letter.move-in-front {
+      animation: floatAnimation 2s ease-in-out infinite;
+      transform: translateY(230px) scale(1.1);
+      z-index: 10;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    @keyframes floatAnimation {
+      0%, 100% {
+        transform: translateY(250px) scale(1.1);
+      }
+      50% {
+        transform: translateY(220px) scale(1.1);
+      }
+    }
+
+    .container.open .flap {
+      transform: rotateX(-180deg);
+    }
+
+    .container.open .envelope {
+      transform: translateY(60px);
+    }
+
+    .letter h2 {
+      margin-top: 0;
+    }
+
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: calc(16px + 16px * var(--size, 1));
+      opacity: 0;
+      animation: floatHearts 6s ease-out forwards var(--delay, 0s);
+      z-index: 5;
+      transform-origin: center;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translate(0, 0) scale(0.6);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.9;
+        transform: translate(0, -30px) scale(var(--size));
+      }
+      100% {
+        opacity: 0;
+        transform: translate(
+          calc(var(--heart-x, 0) * 1px),
+          calc(var(--heart-y, -100) * 1px)
+        ) scale(0.5);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" onclick="openEnvelope(this)">
+    <div class="envelope">
+      <div class="flap"></div>
+      <div class="envelope-body"></div>
+    </div>
+    <div class="letter">
+      <h2>My Love</h2>
+      <p>
+        Every moment with you feels like a dream.<br>
+        Thank you for being the light in my life.<br>
+        I love you always and forever. ❤️<br>
+		I have prepared a letter for you <br>
+		<a href="Letter.html">Click me</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function openEnvelope(el) {
+      const letter = el.querySelector('.letter');
+      
+      el.classList.add("open");
+      letter.style.zIndex = "4";
+      letter.style.transition = "transform 1s ease";
+      letter.classList.add("move-down");
+      
+      // Start floating animation after move-down completes
+      setTimeout(() => {
+        letter.classList.add("move-in-front");
+      }, 1000);
+      
+      // Create hearts at random screen positions
+      // Create fewer hearts but more spread out
+      for(let i = 0; i < 40; i++) {
+        setTimeout(() => {
+          createHeart(el);
+        }, i * 150);
+      }
+    }
+
+    function createHeart(container) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.setProperty('--size', Math.random() * 1.5 + 0.5);
+      heart.style.setProperty('--delay', (Math.random() * 3) + 's');
+
+      // Position in larger area with more spacing
+      const posX = Math.random() * 1.4 - 0.2; // 140% width (-20% to 120%)
+      const posY = Math.random() * 1.4 - 0.2; // 140% height (-20% to 120%)
+      heart.style.left = (posX * window.innerWidth) + 'px';
+      heart.style.top = (posY * window.innerHeight) + 'px';
+
+      // No edge pushing for truly random positioning
+
+      // Float in more extreme and random directions
+      const dirX = (Math.random() * 500 - 250); // Much wider range (-250 to 250)
+      const dirY = (Math.random() * -400) - 100; // Stronger varied upward
+      heart.style.setProperty('--heart-x', dirX + 'px');
+      heart.style.setProperty('--heart-y', dirY + 'px');
+
+      container.appendChild(heart); // Add heart to the container
+
+      // Remove heart after animation completes
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
